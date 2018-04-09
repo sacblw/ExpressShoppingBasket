@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-lg-12.text-center.title
+                    h1= title
+        .row
+            .col-lg-4
+                .jumbotron.products
+                    .text-center
+                        h3 Sports
+                        each item in catalog.Sports[1]
+                            each channel in item
+                                .form-check
+                                    input(class="form-check-input" type="checkbox", name="Channel", id= channel, onClick="addToBasket('#{channel}')")
+                                    label(class="form-check-label")= channel
+
+
+            .col-lg-4
+                .jumbotron.products
+                    .text-center
+                        h3 News
+                        each item in catalog.News[1]
+                           each channel in item
+                              .form-check
+                                  input(class="form-check-input" type="checkbox", name="Channel", value= channel, onClick="addToBasket('#{channel}')")
+                                  label(class="form-check-label")= channel
+            .col-lg-4
+                .jumbotron.products
+                    .text-center
+                        h3 Basket
+                        .basket
+                        a(class="btn btn-primary btn-lg" href="/checkout") Checkout
+
+

@@ -1,0 +1,61 @@
+/*var options = { method: 'POST',
+url: 'http://localhost:3000/api/location-service',
+headers:
+{   'Cache-Control': 'no-cache',
+'Content-Type': 'application/json' },
+form: false,
+json: {"customerID":customerID}
+};
+
+request(options, function (error, response, body) {
+if (error) {
+throw new Error(error);
+} else {
+//if response is locationID send to catalog service
+var location = body.results;
+
+var options2 = {
+method: 'POST',
+url: 'http://localhost:3000/api/catalog-service',
+headers:
+{
+'Cache-Control': 'no-cache',
+'Content-Type': 'application/json'
+},
+form: false,
+json: {"locationID": location}
+};
+request(options2, function (error, response, body) {
+if (error) throw new Error(error);
+var catalog = body.catalog;
+
+console.log(body);
+
+res.render('products', {title: 'Product Selection Page', location: location, catalog: catalog});
+});
+}
+
+});*/
+
+
+
+//Services
+router.post('/api/location-service', function(req, res, next) {
+//get customerID from cookie
+//var custID = parseInt(req.cookies.customerID);
+var custID = req.body.customerID;
+var CustomerLocationService = require('../constructors/CustomerLocationService.js');
+var location = new CustomerLocationService(custID);
+
+res.json({ results: location.findLocation(custID) });
+
+});
+
+router.post('/api/catalog-service', function(req, res, next) {
+//get catalog list
+var loID = req.body.locationID;
+var CatalogueService = require('../constructors/CatalogueService.js');
+var catalog = new CatalogueService(loID);
+
+res.json({ catalog: catalog.fetchCatalog() });
+});

@@ -1,0 +1,19 @@
+body {
+  padding: 5px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+nav{
+  margin-bottom:10px;
+}
+
+a {
+  color: #00B7FF;
+}
+.title{
+  margin:20px 0;
+}
+.products{
+  padding: 2rem 1rem;
+}
+
